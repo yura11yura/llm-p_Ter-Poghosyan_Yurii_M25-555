@@ -21,9 +21,7 @@
 
 Установка зависимостей
 
-`uv pip compile pyproject.toml -o requirements.txt`
-
-`uv pip install -r requirements.txt`
+`uv pip install -r pyproject.toml`
 
 Шаблон .env файла:
 
@@ -63,4 +61,23 @@ OPENROUTER_APP_NAME=llm-fastapi-openrouter
 | GET | `/health` | Проверка работоспособности | Открытый | — | `{"status": "ok", "environment": "string"}` |
 
 ## Демонстрация работы
+Endpoint POST /auth/login
+![Alt text](/images/auth-login.png?raw=true "Optional Title")
 
+Endpoint POST /auth/register
+![Alt text](/images/auth-register.png?raw=true "Optional Title")
+
+Endpoint GET /auth/me
+![Alt text](/images/auth-me.png?raw=true "Optional Title")
+
+Endpoint POST /chat
+![Alt text](/images/chat.png?raw=true "Optional Title")
+
+Endpoint GET /chat/history
+![Alt text](/images/chat-history.png?raw=true "Optional Title")
+
+Endpoint DELETE /chat/history
+![Alt text](/images/delete-chat-history.png?raw=true "Optional Title")
+
+Authorization screen
+![Alt text](/images/authorization.png?raw=true "Optional Title")
