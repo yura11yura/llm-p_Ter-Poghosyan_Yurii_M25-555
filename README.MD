@@ -63,4 +63,4 @@ OPENROUTER_APP_NAME=llm-fastapi-openrouter
 | GET | `/health` | Проверка работоспособности | Открытый | — | `{"status": "ok", "environment": "string"}` |
 
 ## Демонстрация работы
-
+![Alt text](/images/auth-login.png?raw=true "Optional Title")
