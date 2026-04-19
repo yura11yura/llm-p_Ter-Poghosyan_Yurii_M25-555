@@ -81,3 +81,6 @@ Endpoint DELETE /chat/history
 
 Authorization screen
 ![Alt text](/images/authorization.png?raw=true "Optional Title")
+
+Endpoint GET /health
+![Alt text](/images/health.png?raw=true "Optional Title")
