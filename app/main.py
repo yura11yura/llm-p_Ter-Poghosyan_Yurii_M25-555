@@ -11,6 +11,13 @@ from app.api.routes_chat import router as chat_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    """
+    Контекстный менеджер жизненного цикла приложения
+    Создает таблицы БД при запуске приложения
+
+    Аргументы:
+        app - экземпляр приложения FastAPI
+    """
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     yield
@@ -18,6 +25,12 @@ async def lifespan(app: FastAPI):
 
 
 def create_app() -> FastAPI:
+    """
+    Создает и конфигурирует приложение FastAPI
+
+    Возвращает:
+        app - готовое к запуску FastAPI приложение
+    """
     app = FastAPI(
         title = settings.app_name,
         lifespan=lifespan

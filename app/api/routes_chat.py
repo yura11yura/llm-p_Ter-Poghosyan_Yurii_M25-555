@@ -14,6 +14,7 @@ async def chat(
     user_id: int = Depends(get_current_user_id),
     chat_usecase: ChatUseCase = Depends(get_chat_usecase),
 ):
+    """Отправка запроса к LLM и получение ответа."""
     try:
         answer = await chat_usecase.ask(
             user_id=user_id,
@@ -33,6 +34,7 @@ async def get_history(
     chat_usecase: ChatUseCase = Depends(get_chat_usecase),
     limit: int = 50,
 ):
+    """Возвращает историю диалога текущего пользователя."""
     history = await chat_usecase.get_history(user_id, limit)
     return {"history": history}
 
@@ -42,4 +44,5 @@ async def clear_history(
     user_id: int = Depends(get_current_user_id),
     chat_usecase: ChatUseCase = Depends(get_chat_usecase),
 ):
+    """Очищает историю диалога текущего пользователя."""
     await chat_usecase.clear_history(user_id)

@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 
 
 class ChatRequest(BaseModel):
+    """Класс схемы запроса к чату с LLM."""
     prompt: str = Field(..., min_length=1)
     system: Optional[str] = None
     max_history: int = Field(10, ge=1, le=50)
@@ -10,4 +11,5 @@ class ChatRequest(BaseModel):
 
 
 class ChatResponse(BaseModel):
+    """Класс схемы ответа от чата."""
     answer: str

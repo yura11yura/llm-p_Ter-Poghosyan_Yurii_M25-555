@@ -5,6 +5,7 @@ from app.services.openrouter_client import OpenRouterClient
 
 
 class ChatUseCase:
+    """Класс сценариев работы с LLM."""
     def __init__(
         self,
         messages_repo: ChatMessagesRepository,
@@ -21,6 +22,19 @@ class ChatUseCase:
         max_history: int = 12,
         temperature: float = 0.7
     ) -> str:
+        """
+        Отправляет запрос к LLM с учетом истории диалога.
+        
+        Аргументы:
+            user_id - id пользователя, отправившего запрос
+            prompt - текст запроса
+            system - системная инструкция для модели
+            max_history - максимальное количество сообщений из истории
+            temperature - температура генерации
+            
+        Возвращает:
+            Текст ответа от языковой модели
+        """
         llm_messages: List[Dict[str, str]] = []
 
         if system:
@@ -42,6 +56,16 @@ class ChatUseCase:
         return answer
     
     async def get_history(self, user_id: int, limit: int = 50) -> List[Dict]:
+        """
+        Получает историю диалога пользователя.
+        
+        Аргументы:
+            user_id - id пользователя
+            limit - максимальное количество возвращаемых сообщений
+            
+        Возвращает:
+            Список сообщений с полями role, content, created_at
+        """
         messages = await self.messages_repo.get_recent_messages(user_id, limit)
         return [
             {"role": message.role, "content": message.content, "created_at": message.created_at}
@@ -49,4 +73,5 @@ class ChatUseCase:
         ]
     
     async def clear_history(self, user_id: int) -> None:
+        """Удаляет всю историю диалога пользователя."""
         await self.messages_repo.delete_all_for_user(user_id)

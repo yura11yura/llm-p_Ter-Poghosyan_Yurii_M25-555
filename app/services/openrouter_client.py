@@ -6,6 +6,7 @@ from typing import List, Dict
 import httpx
 
 class OpenRouterClient:
+    """Класс клиента для взаимодействия с OpenRouter API."""
     def __init__(self):
         self.base_url = settings.openrouter_base_url
         self.api_key = settings.openrouter_api_key
@@ -18,6 +19,16 @@ class OpenRouterClient:
         messages: List[Dict[str, str]],
         temperature: float = 0.7
     ) -> str: 
+        """
+        Отправляет запрос к LLM и возвращает текст ответа.
+        
+        Аргументы:
+            messages - список сообщений
+            temperature - температура генерации
+                
+        Возвращает:
+            Текст ответа от языковой модели
+        """
         headers = {
             "Authorization": f"Beaver {self.api_key}",
             "HTTP-Referer": self.site_url,

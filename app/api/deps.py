@@ -17,25 +17,30 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    """Создает сессию БД"""
     async with AsyncSessionLocal() as session:
         yield session
 
 
 async def get_users_repo(db: AsyncSession = Depends(get_db)) -> UsersRepository:
+    """Возвращает репозиторий пользователя"""
     return UsersRepository(db)
 
 
 async def get_messages_repo(db: AsyncSession = Depends(get_db)) -> ChatMessagesRepository:
+    """Возвращает репозиторий сообщений"""
     return ChatMessagesRepository(db)
 
 
 def get_llm_client() -> OpenRouterClient:
+    """Возвращает клиента OpenRouter"""
     return OpenRouterClient()
 
 
 async def get_auth_usecase(
     users_repo: UsersRepository = Depends(get_users_repo)
 ) -> AuthUseCase:
+    """Возвращает usecase аутентификации"""
     return AuthUseCase(users_repo)
 
 
@@ -43,6 +48,7 @@ async def get_chat_usecase(
     messages_repo: ChatMessagesRepository = Depends(get_messages_repo),
     llm_client: OpenRouterClient = Depends(get_llm_client)
 ) -> ChatUseCase:
+    """Возвращает usecase чата"""
     return ChatUseCase(messages_repo, llm_client)
 
 
@@ -50,6 +56,7 @@ async def get_current_user_id(
     token: str = Depends(oauth2_scheme),
     users_repo: UsersRepository = Depends(get_users_repo)
 ) -> int:
+    """Возвращает id текущего пользователя по токену jwt"""
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

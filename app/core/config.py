@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    """Класс конфигурации приложения, загружающий настройки из переменных окружения."""
     app_name: str
     env: str
     sqlite_path: str

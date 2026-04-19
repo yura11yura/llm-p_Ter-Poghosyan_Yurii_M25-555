@@ -15,6 +15,7 @@ async def register(
     payload: RegisterRequest,
     auth_usecase: AuthUseCase = Depends(get_auth_usecase)
 ):
+    """Регистрация нового пользователя."""
     try:
         return await auth_usecase.register(payload.email, payload.password)
     except ConflictError as e:
@@ -26,6 +27,7 @@ async def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     auth_usecase: AuthUseCase = Depends(get_auth_usecase)
 ):
+    """Вход в систему и получение JWT токена."""
     try:
         access_token = await auth_usecase.login(form_data.username, form_data.password)
         return TokenResponse(access_token=access_token)
@@ -38,6 +40,7 @@ async def get_me(
     user_id: int = Depends(get_current_user_id),
     auth_usecase: AuthUseCase = Depends(get_auth_usecase)
 ):
+    """Возвращает профиля текущего пользователя."""
     try:
         return await auth_usecase.get_profile(user_id)
     except NotFoundError as e:

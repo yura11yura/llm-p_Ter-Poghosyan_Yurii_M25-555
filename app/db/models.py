@@ -7,6 +7,7 @@ from datetime import datetime
 from typing import List
 
 class User(Base):
+    """ORM-модель пользователя."""
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -22,6 +23,7 @@ class User(Base):
 
 
 class ChatMessage(Base):
+    """ORM-модель сообщения чата."""
     __tablename__ = "chat_message"
 
     id: Mapped[int] = mapped_column(primary_key=True)
