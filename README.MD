@@ -11,6 +11,7 @@
 Клонирование проекта
 
 `git clone git@github.com:yura11yura/llm-p_Ter-Poghosyan_Yurii_M25-555.git`
+
 `cd llm-p_Ter-Poghosyan_Yurii_M25-555`
 
 Создание виртуального окружения
@@ -21,6 +22,7 @@
 Установка зависимостей
 
 `uv pip compile pyproject.toml -o requirements.txt`
+
 `uv pip install -r requirements.txt`
 
 Шаблон .env файла:
