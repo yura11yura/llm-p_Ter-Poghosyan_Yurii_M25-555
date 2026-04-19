@@ -58,3 +58,4 @@ class OpenRouterClient:
                 )
             except Exception as e:
                 raise ExternalServiceError(f"OpenRouter request failed: {str(e)}")
+
