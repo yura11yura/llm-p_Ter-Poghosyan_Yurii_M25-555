@@ -1,7 +1,7 @@
 from app.core.config import settings
 from app.core.errors import ExternalServiceError
 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict
 
 import httpx
 
